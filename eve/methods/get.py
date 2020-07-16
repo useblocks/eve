@@ -242,6 +242,12 @@ def _perform_aggregation(resource, pipeline, options):
     if config.DOMAIN[resource]["hateoas"]:
         response[config.LINKS] = _pagination_links(resource, req, count)
 
+    # return array instead of a dictionary
+    # this silently removes HATEOAS and pagination fields
+    # it happens late because then existing callbacks still work on expected data structure
+    if config.GET_COLLECTION_RESPONSE_ARRAY:
+        response = response['_items']
+
     return response, None, None, 200, []
 
 
@@ -302,6 +308,12 @@ def _perform_find(resource, lookup):
     # response.
     if hasattr(cursor, "extra"):
         getattr(cursor, "extra")(response)
+
+    # return array instead of a dictionary
+    # this silently removes HATEOAS and pagination fields
+    # it happens late because then existing callbacks still work on expected data structure
+    if config.GET_COLLECTION_RESPONSE_ARRAY:
+        response = response['_items']
 
     return response, last_modified, etag, status, headers
 

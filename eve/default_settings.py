@@ -156,6 +156,7 @@ X_MAX_AGE = 21600  # Access-Control-Max-Age when CORS is enabled
 HATEOAS = True  # HATEOAS enabled by default.
 IF_MATCH = True  # IF_MATCH (ETag match) enabled by default.
 ENFORCE_IF_MATCH = True  # ENFORCE_IF_MATCH enabled by default.
+GET_COLLECTION_RESPONSE_ARRAY = False  # GET requests to collections return an array
 
 ALLOWED_FILTERS = ["*"]  # filtering enabled by default
 VALIDATE_FILTERS = False
